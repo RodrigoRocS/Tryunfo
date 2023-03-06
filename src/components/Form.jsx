@@ -26,6 +26,7 @@ class Form extends Component {
             name="cardName"
             value={ cardName }
             onChange={ onInputChange }
+            placeholder="Nome"
           />
         </label>
         <label htmlFor="cardDescription">
@@ -36,6 +37,7 @@ class Form extends Component {
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
+            placeholder="Descrição"
           />
         </label>
         <label htmlFor="cardAttr1">
@@ -45,6 +47,7 @@ class Form extends Component {
             name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
+            placeholder="atributo 1"
           />
         </label>
         <label htmlFor="cardAttr2">
@@ -54,6 +57,7 @@ class Form extends Component {
             name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
+            placeholder="atributo 2"
           />
         </label>
         <label htmlFor="cardAttr3">
@@ -63,6 +67,7 @@ class Form extends Component {
             name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
+            placeholder="atributo 3"
           />
         </label>
         <label htmlFor="cardImage">

@@ -2,18 +2,43 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 
+const MN = 210;
+const MN2 = 90;
+
 class App extends React.Component {
   state = {
     cardName: '',
     cardDescription: '',
-    cardAttr1: '',
-    cardAttr2: '',
-    cardAttr3: '',
+    cardAttr1: '0',
+    cardAttr2: '0',
+    cardAttr3: '0',
     cardImage: '',
-    cardRare: '',
+    cardRare: 'normal',
     cardTrunfo: false,
     hasTrunfo: false,
-    isSaveButtonDisabled: false,
+  };
+
+  isFormValid = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3 } = this.state;
+    const isValid1 = cardName.length > 0
+    && cardDescription.length > 0
+    && cardImage.length > 0
+    && cardRare.length > 0;
+    const isValid2 = Number(cardAttr1) <= MN2
+    && Number(cardAttr2) <= MN2
+    && Number(cardAttr3) <= MN2;
+    const isValid3 = Number(cardAttr1) >= 0
+    && Number(cardAttr2) >= 0
+    && Number(cardAttr3) >= 0
+    && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= MN;
+    return isValid1 && isValid2 && isValid3;
   };
 
   onInputChange = ({ target }) => {
@@ -27,6 +52,7 @@ class App extends React.Component {
   onSaveButtonClick = () => {};
 
   render() {
+    const isSaveButtonDisabled = this.isFormValid();
     const {
       cardName,
       cardDescription,
@@ -37,7 +63,6 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
-      isSaveButtonDisabled,
     } = this.state;
     return (
       <div>
@@ -52,7 +77,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
+          isSaveButtonDisabled={ !isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
