@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Button from './components/Button';
 
 const MN = 210;
 const MN2 = 90;
@@ -66,6 +67,18 @@ class App extends React.Component {
     if (cardTrunfo) this.setState({ hasTrunfo: true });
   };
 
+  removeCard = (cardIndex) => {
+    this.setState((ps) => ({
+      cardArray: ps.cardArray.filter((_card, index) => index !== cardIndex),
+    }));
+    const { cardArray } = this.state;
+    if (cardArray.some((card) => !card.hasTrunfo)) {
+      this.setState({
+        hasTrunfo: false,
+      });
+    }
+  };
+
   render() {
     const isSaveButtonDisabled = this.isFormValid();
     const {
@@ -110,18 +123,24 @@ class App extends React.Component {
           />
         </div>
         <div>
-          {cardArray?.map((e) => (
-            <Card
-              key={ e.cardName }
-              cardName={ e.cardName }
-              cardDescription={ e.cardDescription }
-              cardAttr1={ e.cardAttr1 }
-              cardAttr2={ e.cardAttr2 }
-              cardAttr3={ e.cardAttr3 }
-              cardImage={ e.cardImage }
-              cardRare={ e.cardRare }
-              cardTrunfo={ e.cardTrunfo }
-            />
+          {cardArray?.map((e, index) => (
+            <>
+              <Card
+                key={ e.cardName }
+                cardName={ e.cardName }
+                cardDescription={ e.cardDescription }
+                cardAttr1={ e.cardAttr1 }
+                cardAttr2={ e.cardAttr2 }
+                cardAttr3={ e.cardAttr3 }
+                cardImage={ e.cardImage }
+                cardRare={ e.cardRare }
+                cardTrunfo={ e.cardTrunfo }
+              />
+              <Button
+                removeCard={ this.removeCard }
+                index={ index }
+              />
+            </>
           ))}
         </div>
       </>
