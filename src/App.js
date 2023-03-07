@@ -27,18 +27,19 @@ class App extends React.Component {
       cardRare,
       cardAttr1,
       cardAttr2,
-      cardAttr3 } = this.state;
+      cardAttr3,
+    } = this.state;
     const isValid1 = cardName.length > 0
-    && cardDescription.length > 0
-    && cardImage.length > 0
-    && cardRare.length > 0;
+      && cardDescription.length > 0
+      && cardImage.length > 0
+      && cardRare.length > 0;
     const isValid2 = Number(cardAttr1) <= MN2
-    && Number(cardAttr2) <= MN2
-    && Number(cardAttr3) <= MN2;
+      && Number(cardAttr2) <= MN2
+      && Number(cardAttr3) <= MN2;
     const isValid3 = Number(cardAttr1) >= 0
-    && Number(cardAttr2) >= 0
-    && Number(cardAttr3) >= 0
-    && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= MN;
+      && Number(cardAttr2) >= 0
+      && Number(cardAttr3) >= 0
+      && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= MN;
     return isValid1 && isValid2 && isValid3;
   };
 
@@ -77,35 +78,53 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
+      cardArray,
     } = this.state;
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ !isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-      </div>
+      <>
+        <div>
+          <h1>Tryunfo</h1>
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ hasTrunfo }
+            isSaveButtonDisabled={ !isSaveButtonDisabled }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+        </div>
+        <div>
+          {cardArray?.map((e) => (
+            <Card
+              key={ e.cardName }
+              cardName={ e.cardName }
+              cardDescription={ e.cardDescription }
+              cardAttr1={ e.cardAttr1 }
+              cardAttr2={ e.cardAttr2 }
+              cardAttr3={ e.cardAttr3 }
+              cardImage={ e.cardImage }
+              cardRare={ e.cardRare }
+              cardTrunfo={ e.cardTrunfo }
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }
