@@ -32,8 +32,6 @@ class Form extends Component {
         <label htmlFor="cardDescription">
           <textarea
             name="cardDescription"
-            cols="30"
-            rows="10"
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -92,18 +90,30 @@ class Form extends Component {
           </select>
         </label>
         <label htmlFor="cardTrunfo">
-          <input
-            type="checkbox"
-            data-testid="trunfo-input"
-            name="cardTrunfo"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
+          { hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p>
+            : (
+              <input
+                type="checkbox"
+                data-testid="trunfo-input"
+                name="cardTrunfo"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+              />
+            )}
         </label>
         <button
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
-          onClick={ onSaveButtonClick }
+          onClick={ () => onSaveButtonClick({ cardName,
+            cardDescription,
+            cardAttr1,
+            cardAttr2,
+            cardAttr3,
+            cardImage,
+            cardRare,
+            cardTrunfo,
+            hasTrunfo,
+          }) }
         >
           Salvar
         </button>

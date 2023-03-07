@@ -16,6 +16,7 @@ class App extends React.Component {
     cardRare: 'normal',
     cardTrunfo: false,
     hasTrunfo: false,
+    cardArray: [],
   };
 
   isFormValid = () => {
@@ -49,8 +50,9 @@ class App extends React.Component {
     });
   };
 
-  onSaveButtonClick = () => {
-    this.setState({
+  onSaveButtonClick = (param) => {
+    const { cardTrunfo } = this.state;
+    this.setState((ps) => ({
       cardName: '',
       cardDescription: '',
       cardAttr1: '0',
@@ -58,7 +60,9 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
-    });
+      cardArray: [...ps.cardArray, param],
+    }));
+    if (cardTrunfo) this.setState({ hasTrunfo: true });
   };
 
   render() {
