@@ -20,6 +20,7 @@ class App extends React.Component {
     hasTrunfo: false,
     cardArray: [],
     cardFilter: '',
+    cardFilterRare: 'todas',
   };
 
   isFormValid = () => {
@@ -95,20 +96,30 @@ class App extends React.Component {
       hasTrunfo,
       cardArray,
       cardFilter,
+      cardFilterRare,
     } = this.state;
 
     const filteredCards = cardArray.filter((e) => {
       const takeName = e.cardName;
       return takeName.toUpperCase().includes(cardFilter.toUpperCase());
     });
+
+    const filteredCards2 = filteredCards.filter((e) => {
+      const takeName = e.cardRare;
+      if (cardFilterRare === 'todas') {
+        return filteredCards;
+      }
+      return takeName === cardFilterRare;
+    });
+
     return (
       <>
         <div>
           <h1>Tryunfo</h1>
           <CardFilter
             cardFilter={ cardFilter }
-            cardArray={ cardArray }
             onInputChange={ this.onInputChange }
+            cardFilterRare={ cardFilterRare }
           />
           <Form
             cardName={ cardName }
@@ -136,7 +147,7 @@ class App extends React.Component {
           />
         </div>
         <div>
-          {filteredCards?.map((e, index) => (
+          {filteredCards2?.map((e, index) => (
             <>
               <Card
                 key={ e.cardName }
