@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Button extends Component {
+class Rbutton extends Component {
   render() {
-    const { removeCard, index } = this.props;
+    const { cardRemove, index } = this.props;
     return (
       <button
         data-testid="delete-button"
-        onClick={ () => removeCard(index) }
-        key={ index }
+        onClick={ () => cardRemove(index) }
       >
         Excluir
       </button>
@@ -16,8 +15,8 @@ class Button extends Component {
   }
 }
 
-Button.propTypes = {
-  removeCard: PropTypes.func.isRequired,
+Rbutton.propTypes = {
+  cardRemove: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };
-export default Button;
+export default Rbutton;

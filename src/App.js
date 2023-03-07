@@ -1,7 +1,8 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
-import Button from './components/Button';
+import Rbutton from './components/Rbutton';
+import CardFilter from './components/CardFilter';
 
 const MN = 210;
 const MN2 = 90;
@@ -18,6 +19,7 @@ class App extends React.Component {
     cardTrunfo: false,
     hasTrunfo: false,
     cardArray: [],
+    cardFilter: '',
   };
 
   isFormValid = () => {
@@ -67,7 +69,7 @@ class App extends React.Component {
     if (cardTrunfo) this.setState({ hasTrunfo: true });
   };
 
-  removeCard = (cardIndex) => {
+  cardRemove = (cardIndex) => {
     this.setState((ps) => ({
       cardArray: ps.cardArray.filter((_card, index) => index !== cardIndex),
     }));
@@ -92,11 +94,22 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       cardArray,
+      cardFilter,
     } = this.state;
+
+    const filteredCards = cardArray.filter((e) => {
+      const takeName = e.cardName;
+      return takeName.toUpperCase().includes(cardFilter.toUpperCase());
+    });
     return (
       <>
         <div>
           <h1>Tryunfo</h1>
+          <CardFilter
+            cardFilter={ cardFilter }
+            cardArray={ cardArray }
+            onInputChange={ this.onInputChange }
+          />
           <Form
             cardName={ cardName }
             cardDescription={ cardDescription }
@@ -123,7 +136,7 @@ class App extends React.Component {
           />
         </div>
         <div>
-          {cardArray?.map((e, index) => (
+          {filteredCards?.map((e, index) => (
             <>
               <Card
                 key={ e.cardName }
@@ -136,8 +149,8 @@ class App extends React.Component {
                 cardRare={ e.cardRare }
                 cardTrunfo={ e.cardTrunfo }
               />
-              <Button
-                removeCard={ this.removeCard }
+              <Rbutton
+                cardRemove={ this.cardRemove }
                 index={ index }
               />
             </>
