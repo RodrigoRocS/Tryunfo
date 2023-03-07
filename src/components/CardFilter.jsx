@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class CardFilter extends Component {
   render() {
-    const { onInputChange, cardFilter, cardFilterRare } = this.props;
+    const { onInputChange, cardFilter, cardFilterRare, cardTrunfoFilter } = this.props;
 
     return (
       <div>
@@ -14,11 +14,13 @@ class CardFilter extends Component {
             name="cardFilter"
             value={ cardFilter }
             onChange={ onInputChange }
-            placeholder="Filtrar"
+            placeholder="Filtrar por nome"
+            disabled={ cardTrunfoFilter }
           />
         </label>
-        <label htmlFor="cardRare">
+        <label htmlFor="cardFilterRare">
           <select
+            disabled={ cardTrunfoFilter }
             name="cardFilterRare"
             data-testid="rare-filter"
             value={ cardFilterRare }
@@ -30,6 +32,16 @@ class CardFilter extends Component {
             <option value="todas">todas</option>
           </select>
         </label>
+        <label htmlFor="cardTrunfoFilter">
+          Super Trunfo
+          <input
+            type="checkbox"
+            data-testid="trunfo-filter"
+            name="cardTrunfoFilter"
+            checked={ cardTrunfoFilter }
+            onChange={ onInputChange }
+          />
+        </label>
       </div>
     );
   }
@@ -39,5 +51,6 @@ CardFilter.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   cardFilter: PropTypes.string.isRequired,
   cardFilterRare: PropTypes.string.isRequired,
+  cardTrunfoFilter: PropTypes.bool.isRequired,
 };
 export default CardFilter;
